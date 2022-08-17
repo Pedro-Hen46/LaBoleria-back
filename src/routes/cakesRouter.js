@@ -1,15 +1,14 @@
 import { Router } from "express";
 
-import { schemaChecker } from "../middlewares/schemaChecker.js";
+import schemaChecker from "../middlewares/schemaChecker.js";
 import { checkNameConflict } from "../middlewares/checkNameConflict.js";
 
-import { cakesController } from "../controllers/cakesController.js";
-
-import { createCakes } from "../schemas/cakesSchema.js"
+import createCake from "../controllers/cakesController.js";
+import createCakesSchema  from "../schemas/cakesSchema.js"
 
 const cakesRouter = Router();
 
-cakesRouter.post('/cakes', schemaChecker(createCakes), checkNameConflict, cakesController);
+cakesRouter.post('/cakes', schemaChecker(createCakesSchema), checkNameConflict, createCake);
 
 
 export default cakesRouter;

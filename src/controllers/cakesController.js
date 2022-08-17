@@ -1,6 +1,6 @@
 import { insertCake } from "../repositories/cakesRepositories.js";
 
-export async function createCake(req, res){
+export default async function createCake(req, res){
     const { name, price, image, description } = req.body;
 
     try {
@@ -9,6 +9,6 @@ export async function createCake(req, res){
         return res.status(201).send("Cake successfully created");
     } catch (err) {
         console.log(err);
-        return res.status(500).send("An internal server error occurred: ", err);
+        return res.status(500).send("An internal server error occurred");
     }
 }

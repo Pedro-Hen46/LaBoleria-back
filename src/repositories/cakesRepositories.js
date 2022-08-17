@@ -4,7 +4,7 @@ function insertCake(name, image, price, description){
     return connection.query(`
     INSERT INTO cakes 
     (name, price, image, description) VALUES
-    (1, $1, $2, $3, $4)
+    ($1, $2, $3, $4)
     `, [name, image, price, description])
 }
 

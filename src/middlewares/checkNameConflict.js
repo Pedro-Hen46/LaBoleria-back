@@ -6,7 +6,7 @@ export async function checkNameConflict(req, res, next){
     try {
         const { rows: cakeProperties } = await getCakeByName(name);
 
-        if (cakeProperties.length === 1) return res.sendStatus(409);
+        if (cakeProperties.length === 1) return res.status(409).send("An conflict was found with the cake name, try again.");
 
         next();
     } catch (err) {
