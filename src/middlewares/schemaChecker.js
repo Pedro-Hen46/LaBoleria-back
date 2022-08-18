@@ -1,3 +1,4 @@
+
 export default function schemaChecker(schema, type = "body") {
   return (req, res, next) => {
     const payload = type === "body" ? req.body : req.params;
