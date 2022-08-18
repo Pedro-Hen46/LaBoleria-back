@@ -78,7 +78,7 @@ export async function getOrderById(req, res) {
   
   const regexId = /[0-9]/;
   
-  if (regexId.test(id) === false) return res.status(400).send("Invalid Parameter");
+  if (regexId.test(id) === false) return res.status(400).send("Invalid Parameter!");
   
   const queryStringText = `WHERE o.id = '${id}'`;
   
@@ -117,3 +117,37 @@ export async function getOrderById(req, res) {
       .send("An internal server error occurred getting order by id");
   }
 }
+
+export async function getOrdersByClient(req, res){
+    const { id } = req.params;
+    const queryStringText = `WHERE cl.id='${id}'`;
+
+    const regexIdClient = /[0-9]/;
+    if (regexIdClient.test(id) === false) {
+        return res.status(400).send("Invalid Parameter!")
+    };
+
+    try {
+        const {rows: orderByClient} = await getOrdersDataBase(queryStringText);
+
+        if (orderByClient.length === 0) return res.status(404).send(orderByClient);
+
+        const allOrders = orderByClient.map(order => {
+            return (
+                {
+                    "orderId": order.orderId,
+                    "quantity": order.quantity,
+                    "createAt": order.createAt,
+                    "totalPrice": order.totalPrice,
+                    "cakeName": order.cakeName,
+                }
+            )
+        });
+
+        res.status(200).send(allOrders)
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An internal server error occurred getting order by ClientId");
+    }
+};
+    
