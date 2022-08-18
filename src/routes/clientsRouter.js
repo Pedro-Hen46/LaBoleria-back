@@ -1,13 +1,12 @@
 import { Router } from "express";
 
 import schemaChecker from "../middlewares/schemaChecker.js";
+import createClientSchema from "../schemas/clientsSchemas.js";
+import createClient from "../controllers/clientsController.js";
 
-import createCake from "../controllers/cakesController.js";
-import createCakesSchema  from "../schemas/cakesSchema.js"
+const clientsRouter = Router();
 
-const cakesRouter = Router();
-
-cakesRouter.post('/cakes', schemaChecker(createCakesSchema),  createCake);
+clientsRouter.post('/clients', schemaChecker(createClientSchema),  createClient);
 
 
-export default cakesRouter;
+export default clientsRouter;

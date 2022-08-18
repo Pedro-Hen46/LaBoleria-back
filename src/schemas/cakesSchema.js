@@ -2,7 +2,7 @@ import joi from "joi";
 
 const createCakesSchema = joi.object({
     name: joi.string().min(2).required(),
-    price: joi.number().greater(0).required(0),
+    price: joi.number().greater(0).required(),
     description: joi.string().allow('').required(),
     image: joi.string()
         .uri()
